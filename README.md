@@ -8,4 +8,5 @@
 
 <hr>
 <a href="https://www.linkedin.com/in/alex3aguiar/">meu linkedin</a>
+<br>
 <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/arts.md">Algumas das minhas artes</a>

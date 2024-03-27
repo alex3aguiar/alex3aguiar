@@ -35,20 +35,29 @@
 
     <script>
         window.onload = function () {
-            fetch('README.md')
-                .then(response => response.text())
-                .then(text => {
-                    const converter = new showdown.Converter();
-                    const html = converter.makeHtml(text);
-                    document.getElementById('content').innerHTML = html;
-                })
-                .catch(error => console.error('Erro ao carregar o arquivo Markdown:', error));
+            function loadMD(file ='README.md') {
+                fetch(file)
+                    .then(response => response.text())
+                    .then(text => {
+                        const converter = new showdown.Converter();
+                        const html = converter.makeHtml(text);
+                        document.getElementById('content').innerHTML = html;
 
-            Array.from(document.getElementsByTagName('a')).forEach(function (link) {
-                if (link.href && link.href.endsWith('.md')) {
-                    console.log("Link para arquivo Markdown encontrado:", link.href);
-                }
-            });
+                        Array.from(document.getElementsByTagName('a')).forEach(function (link) {
+                            if (link.href && link.href.endsWith('.md')) {
+                                link.addEventListener('click', function (event) {
+                                    event.preventDefault();
+                                    loadMD(link.href.split(`/main/`)[1])
+
+                                });
+                            }
+                        });
+
+                    })
+                    .catch(error => console.error('Erro ao carregar o arquivo Markdown:', error));
+            }
+
+            loadMD()
         }
     </script>
     <script src="https://unpkg.com/showdown@2.1.0/dist/showdown.min.js"></script>

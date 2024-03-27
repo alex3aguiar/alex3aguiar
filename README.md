@@ -1,8 +1,8 @@
- <h1>Meu nome é Alex Silva</h1>
+<h1>Meu nome é Alex Silva</h1>
 <h3>Sou programador fullstack de profissão e um artista por hobby</h3>
 
 
-##Sou alérgico a camarão
+## Sou alérgico a camarão
 ![](https://alex3aguiar.github.io/alex3aguiar/camarao.jpeg)
 
 

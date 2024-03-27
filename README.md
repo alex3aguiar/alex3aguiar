@@ -1,4 +1,4 @@
- 
+ <h1>Meu nome é Alex Silva</h1>
 <h3>Sou programador fullstack de profissão e um artista por hobby</h3>
 
 
@@ -7,4 +7,4 @@
    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="Linkedin" width="40" height="30" />
   </a>
   <hr>
-<a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/arts.md">algumas das minhas artes</a>
+<a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/arts.md">Algumas das minhas artes</a>

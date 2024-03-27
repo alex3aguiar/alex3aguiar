@@ -4,7 +4,8 @@
   <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/README.md">voltar</a>
 
 
-![](https://alex3aguiar.github.io/alex3aguiar/arts/porco.jpg)### porco em 3d
+![](https://alex3aguiar.github.io/alex3aguiar/arts/porco.jpg)
+### porco em 3d
 
   <hr>
 
@@ -56,6 +57,4 @@
 
   <hr>
 
-para mais veja meu  <a href="https://www.instagram.com/alex3aguiar/">meu instagram</a>
-
-
+veja mais no <a href="https://www.instagram.com/alex3aguiar/">meu instagram</a>

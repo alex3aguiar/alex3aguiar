@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem Alternada</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+        #container {
+            height: calc(100% - 40px); /* Ajusta a altura para deixar espaço para os botões */
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            width: 1px; /* Define a largura em pixels */
+            height: 100%; /* Ocupa toda a altura da tela */
+        }
+
+        .black {
+            background-color: black;
+        }
+
+        .white {
+            background-color: white;
+        }
+
+        #controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="controls">
+        <button id="increaseButton">Mais</button>
+        <button id="decreaseButton">Menos</button>
+    </div>
+    <script>
+        const container = document.getElementById('container');
+        const increaseButton = document.getElementById('increaseButton');
+        const decreaseButton = document.getElementById('decreaseButton');
+
+        let columnWidth = 1; // Largura inicial da coluna em pixels
+
+        // Função para adicionar as colunas
+        function addColumns() {
+            container.innerHTML = ''; // Limpa o contêiner antes de adicionar as colunas
+
+            // Define o número de colunas
+            const numColumns = Math.ceil(window.innerWidth / columnWidth);
+
+            // Adiciona as colunas alternadas ao contêiner
+            for (let i = 0; i < numColumns; i++) {
+                const column = document.createElement('div');
+                column.classList.add('column');
+                column.style.width = columnWidth + 'px'; // Define a largura da coluna
+                column.classList.add(i % 2 === 0 ? 'black' : 'white');
+                container.appendChild(column);
+            }
+        }
+
+        // Event listener para o botão de aumento
+        increaseButton.addEventListener('click', () => {
+            columnWidth++; // Incrementa a largura da coluna
+            addColumns(); // Atualiza as colunas
+        });
+
+        // Event listener para o botão de diminuição
+        decreaseButton.addEventListener('click', () => {
+            if (columnWidth > 1) {
+                columnWidth--; // Decrementa a largura da coluna (se for maior que 1)
+                addColumns(); // Atualiza as colunas
+            }
+        });
+
+        // Chamada inicial para adicionar as colunas
+        addColumns();
+    </script>
+</body>
+</html>

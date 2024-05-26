@@ -1,8 +1,7 @@
 
 
 # aqui está algumas artes que me orgulho muito
-  <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/README.md">voltar</a>
-
+  
 
 ![](https://alex3aguiar.github.io/alex3aguiar/arts/porco.jpg)
 ### porco em 3d

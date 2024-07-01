@@ -4,7 +4,7 @@ atari 2600
 ![image](https://github.com/alex3aguiar/alex3aguiar/assets/16597480/c0a45d27-753d-4e14-b754-3b2f022c0347)
 
 
-master system tectoy com sonic na memória
+master system 3 compact da  tectoy com sonic na memória
 ![image](https://github.com/alex3aguiar/alex3aguiar/assets/16597480/1cda1ccd-8c0b-4ba6-94f8-0dd12e267bb8)
 
 

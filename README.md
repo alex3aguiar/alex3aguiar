@@ -12,5 +12,7 @@
 <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/arts.md">Algumas das minhas artes</a>
 <br>
 <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/comandos-que-eu-sempre-esqueço-e-preciso-de-um-lugar-pra-consultar.md">comandos git que sempre esqeço</a>
+
+<a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/video%20games.md">video games que tive</a>
 <br>
 <a href="https://github.com/alex3aguiar">Meu github</a>

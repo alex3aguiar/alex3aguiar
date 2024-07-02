@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Hora de Almoço</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .message {
+            font-size: 2em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="message" id="message"></div>
+    <script>
+        function checkLunchTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const messageElement = document.getElementById('message');
+            
+            if (hours >= 12 && hours < 13) {
+                messageElement.innerHTML = "É hora de almoço!";
+            } else {
+                messageElement.innerHTML = "Ainda não é hora de almoço.";
+            }
+        }
+
+        checkLunchTime();
+        setInterval(checkLunchTime, 60000); // Verifica a cada minuto
+    </script>
+</body>
+</html>

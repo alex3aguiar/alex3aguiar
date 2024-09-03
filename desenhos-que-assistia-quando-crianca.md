@@ -12,3 +12,11 @@ eu tinha a  fita vhs com o filme, assistia varias vezes e gostava muito, tinha m
 ![image](https://github.com/user-attachments/assets/9665fec1-8a27-4b1f-b41c-407e703d2b5c)
 
 eu lembro que assistia na época do prézinho, lembro MUITO vagamente, passava na tc cultura
+
+![image](https://github.com/user-attachments/assets/8c4dbab3-d7d0-4a83-82f9-2db43eb99cc0)
+
+Rupert Urso
+
+![image](https://github.com/user-attachments/assets/d4f187bb-36fb-4169-a264-a8829259630c)
+
+O Pequeno Urso 

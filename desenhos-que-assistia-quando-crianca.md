@@ -8,3 +8,6 @@ lembro que eu tinha uma fita vhs com alguns epsódios, lembro que tinha um epsó
 
 eu tinha a  fita vhs com o filme, assistia varias vezes e gostava muito, tinha medo da parte dos burros
 
+
+![image](https://github.com/user-attachments/assets/9665fec1-8a27-4b1f-b41c-407e703d2b5c)
+eu lembro que assistia na época do prézinho, lembro MUITO vagamente

@@ -10,4 +10,5 @@ eu tinha a  fita vhs com o filme, assistia varias vezes e gostava muito, tinha m
 
 
 ![image](https://github.com/user-attachments/assets/9665fec1-8a27-4b1f-b41c-407e703d2b5c)
-eu lembro que assistia na época do prézinho, lembro MUITO vagamente
+
+eu lembro que assistia na época do prézinho, lembro MUITO vagamente, passava na tc cultura

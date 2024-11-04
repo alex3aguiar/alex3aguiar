@@ -17,5 +17,7 @@
 <br>
 <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/desenhos-que-assistia-quando-crianca.md">desenhos-que-assistia-quando-crianca</a>
 <br>
+<a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/coisas%20que%20gosto.md">coisas que gosto</a>
+<br>
 
 <a href="https://github.com/alex3aguiar">Meu github</a>

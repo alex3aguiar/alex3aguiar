@@ -3,7 +3,8 @@
 
 
 ## Sou alérgico a camarão
-![](https://alex3aguiar.github.io/alex3aguiar/camarao.jpeg)
+<img width="113" alt="image" src="https://github.com/user-attachments/assets/6fd3d294-65ce-4bfd-8444-cd16c35a2426">
+
 
 
 <hr>

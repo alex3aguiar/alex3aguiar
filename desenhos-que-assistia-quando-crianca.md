@@ -20,3 +20,7 @@ Rupert Urso
 ![image](https://github.com/user-attachments/assets/d4f187bb-36fb-4169-a264-a8829259630c)
 
 O Pequeno Urso 
+
+
+![image](https://github.com/user-attachments/assets/a629cfd2-2c28-4939-a85b-d83e6563a7a1)
+

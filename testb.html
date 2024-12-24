@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Bluetooth</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    textarea {
+      width: 100%;
+      height: 100px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Chat via Bluetooth</h1>
+  <textarea id="messages" readonly></textarea>
+  <br>
+  <input type="text" id="inputMessage" placeholder="Escreva sua mensagem">
+  <button id="sendMessage">Enviar</button>
+  <button id="connect">Conectar a outro dispositivo</button>
+
+  <script>
+    let device, server, service, characteristic;
+    const messages = document.getElementById('messages');
+
+    document.getElementById('connect').addEventListener('click', async () => {
+      try {
+        device = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
+          optionalServices: ['battery_service'] 
+        });
+        server = await device.gatt.connect();
+        messages.value += "Conectado ao dispositivo: " + device.name + "\n";
+
+        // Exemplo para ler um serviço BLE
+        service = await server.getPrimaryService('battery_service');
+        characteristic = await service.getCharacteristic('battery_level');
+        messages.value += "Serviço Bluetooth disponível\n";
+      } catch (error) {
+        messages.value += "Erro: " + error.message + "\n";
+      }
+    });
+
+    document.getElementById('sendMessage').addEventListener('click', async () => {
+      const message = document.getElementById('inputMessage').value;
+      if (characteristic && message) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(message);
+        await characteristic.writeValue(data);
+        messages.value += "Você: " + message + "\n";
+      } else {
+        messages.value += "Conexão ou característica não disponível.\n";
+      }
+    });
+  </script>
+</body>
+</html>

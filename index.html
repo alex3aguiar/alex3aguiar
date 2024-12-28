@@ -59,13 +59,10 @@
 
         }
 
-
-
         .text {
             text-align: center;
             z-index: 1;
         }
-
 
         #home{
             font-size: xx-large;
@@ -82,7 +79,21 @@
     </div>
     <script>
         window.onload = function () {
-        
+            const giscusScript = document.createElement('script');
+            giscusScript.src = "https://giscus.app/client.js";
+            giscusScript.setAttribute('data-repo', 'alex3aguiar/alex3aguiar');
+            giscusScript.setAttribute('data-repo-id', 'R_kgDOLlx2gg');
+            giscusScript.setAttribute('data-mapping', 'pathname');
+            giscusScript.setAttribute('data-strict', '0');
+            giscusScript.setAttribute('data-reactions-enabled', '1');
+            giscusScript.setAttribute('data-emit-metadata', '0');
+            giscusScript.setAttribute('data-input-position', 'top');
+            giscusScript.setAttribute('data-theme', 'preferred_color_scheme');
+            giscusScript.setAttribute('data-lang', 'pt');
+            giscusScript.setAttribute('data-loading', 'lazy');
+            giscusScript.crossOrigin = 'anonymous';
+            giscusScript.async = true;
+
             function loadMD(file = 'README.md') {
                 fetch(file)
                     .then(response => response.text())
@@ -95,42 +106,44 @@
                             if (link.href && link.href.endsWith('.md')) {
                                 link.addEventListener('click', function (event) {
                                     event.preventDefault();
-                                    const urlNOva = link.href.split(`/main/`)[1]
+                                    const urlNOva = link.href.split(`/main/`)[1];
                                     window.location.hash = urlNOva;
-                                    loadMD(urlNOva)
-
+                                    loadMD(urlNOva);
+                                    updateGiscus(urlNOva);
                                 });
                             }
                         });
-
                     })
                     .catch(error => console.error('Erro ao carregar o arquivo Markdown:', error));
             }
-            if(window.location.hash){
-                loadMD(window.location.hash.slice(1))
-            }else{
-                loadMD()
+
+            function updateGiscus(category) {
+                // Remove the existing Giscus iframe/script
+                const existingGiscus = document.querySelector('script[src="https://giscus.app/client.js"]');
+                if (existingGiscus) {
+                    existingGiscus.remove();
+                }
+                const existingIframe = document.querySelector('iframe.giscus-frame');
+                if (existingIframe) {
+                    existingIframe.remove();
+                }
+
+                // Add a new Giscus script with updated data-category and data-category-id
+                giscusScript.setAttribute('data-category', category || 'home');
+                giscusScript.setAttribute('data-category-id', category || 'home');
+                document.body.appendChild(giscusScript);
             }
 
-            
-        }
+            if (window.location.hash) {
+                const initialFile = window.location.hash.slice(1);
+                loadMD(initialFile);
+                updateGiscus(initialFile);
+            } else {
+                loadMD();
+                updateGiscus('home');
+            }
+        };
     </script>
-    <script src="https://giscus.app/client.js"
-        data-repo="alex3aguiar/alex3aguiar"
-        data-repo-id="R_kgDOLlx2gg"
-        data-category="[INSIRA O NOME DA CATEGORIA AQUI]"
-        data-category-id="[INSIRA O ID DA CATEGORIA AQUI]"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="top"
-        data-theme="preferred_color_scheme"
-        data-lang="pt"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-</script>
     <script src="https://unpkg.com/showdown@2.1.0/dist/showdown.min.js"></script>
 </body>
 

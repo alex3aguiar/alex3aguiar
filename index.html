@@ -95,7 +95,7 @@
                             if (link.href && link.href.endsWith('.md')) {
                                 link.addEventListener('click', function (event) {
                                     event.preventDefault();
-                                    const urlNOva = link.href.split(/main/)[1]
+                                    const urlNOva = link.href.split(`/main/`)[1]
                                     window.location.hash = urlNOva;
                                     loadMD(urlNOva)
 

@@ -13,11 +13,13 @@ uma caneca
 
 um relogio de parede
 
+um poke(comida)
+
 uma marmita com algum comida bem gostosa(tirando camarão, sou alérgico. não lembro se ja falei isso)
 
 canetinhas
 
-café ja moido, nao tenho moedor 
+café ja moido, nao tenho moedor
 
 roupa de cama pra Casal  1,88cm x 1,38cm x 0,30cm
 
@@ -26,4 +28,4 @@ uma toalha
 algum item da minha lista de desejos da amazon
 https://www.amazon.com.br/hz/wishlist/ls/BSQKTSSASVCT?ref_=wl_share
 
-nao compre roupa pra mim, 99% de certeza que vc vai errar
+nao compre roupa pra mim, 99% de certeza que vc vai errar!

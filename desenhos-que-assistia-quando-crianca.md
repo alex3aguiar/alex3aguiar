@@ -24,3 +24,10 @@ O Pequeno Urso
 
 ![image](https://github.com/user-attachments/assets/a629cfd2-2c28-4939-a85b-d83e6563a7a1)
 
+a hora de recreio
+![image](https://github.com/user-attachments/assets/f0f35ece-06c2-47d1-8b08-142b1f0d0146)
+
+
+doug 
+![image](https://github.com/user-attachments/assets/c621fa58-a99f-40a1-b60b-00a9cff54694)
+

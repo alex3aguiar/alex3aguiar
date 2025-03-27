@@ -6,7 +6,7 @@
 <img width="113" alt="image" src="https://github.com/user-attachments/assets/6fd3d294-65ce-4bfd-8444-cd16c35a2426">
 
 
-
+<a href="halex3aguiar.github.io/alex3aguiar/">Home</a>
 <hr>
 <a href="https://www.linkedin.com/in/alex3aguiar/">Meu linkedin</a>
 <br>

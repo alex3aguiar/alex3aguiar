@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Inimigos</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #222; color: white; padding: 10px; }
+        .enemy { border: 2px solid red; padding: 15px; margin: 10px; display: block; background: #400; border-radius: 10px; }
+        .enemy h2 { margin: 5px 0; }
+        .actions { margin-top: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        button { padding: 10px; font-size: 16px; border: none; cursor: pointer; border-radius: 5px; }
+        .damage { background-color: darkred; color: white; }
+        .attack { background-color: darkblue; color: white; }
+        .log { margin-top: 20px; border-top: 2px solid white; padding-top: 10px; text-align: left; max-width: 90%; margin-left: auto; margin-right: auto; }
+    </style>
+</head>
+<body>
+    <h1>Combate</h1>
+    <div id="enemies">
+        <div class="enemy" data-name="Golem Guardião" data-hp="80">
+            <h2>Golem Guardião</h2>
+            <p>HP: <span class="hp">80/80</span></p>
+            <div class="actions">
+                <button class="damage" onclick="damageEnemy(this, 1)">-1 HP</button>
+                <button class="attack" onclick="attack('Golem Guardião', 'soco pesado', 12)">Atacar</button>
+            </div>
+        </div>
+        <div class="enemy" data-name="Arqueiro Sombrio" data-hp="40">
+            <h2>Arqueiro Sombrio</h2>
+            <p>HP: <span class="hp">40/40</span></p>
+            <div class="actions">
+                <button class="damage" onclick="damageEnemy(this, 1)">-1 HP</button>
+                <button class="attack" onclick="attack('Arqueiro Sombrio', 'flecha sombria', 8)">Atacar</button>
+            </div>
+        </div>
+        <div class="enemy" data-name="Mago Corrupto" data-hp="35">
+            <h2>Mago Corrupto</h2>
+            <p>HP: <span class="hp">35/35</span></p>
+            <div class="actions">
+                <button class="damage" onclick="damageEnemy(this, 1)">-1 HP</button>
+                <button class="attack" onclick="attack('Mago Corrupto', 'raio arcano', 10)">Atacar</button>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Histórico de Ações</h2>
+    <div id="log" class="log"></div>
+    <script>
+        function damageEnemy(button, amount) {
+            let enemyDiv = button.closest(".enemy");
+            let hpElement = enemyDiv.querySelector(".hp");
+            let currentHp = parseInt(enemyDiv.getAttribute("data-hp"));
+            currentHp = Math.max(0, currentHp - amount);
+            enemyDiv.setAttribute("data-hp", currentHp);
+            let maxHp = hpElement.textContent.split("/")[1];
+            hpElement.textContent = `${currentHp}/${maxHp}`;
+            logAction(`${enemyDiv.getAttribute("data-name")} perdeu ${amount} HP!`);
+        }
+
+        function attack(name, move, maxDamage) {
+            let attackRoll = rollDice(20);
+            let damageRoll = rollDice(maxDamage);
+            logAction(`${name} rolou ${attackRoll} para acertar e causou ${damageRoll} de dano com ${move}!`);
+        }
+
+        function rollDice(sides) {
+            return Math.floor(Math.random() * sides) + 1;
+        }
+
+        function logAction(action) {
+            let logDiv = document.getElementById("log");
+            let entry = document.createElement("p");
+            entry.textContent = action;
+            logDiv.prepend(entry);
+            saveToLocalStorage(action);
+        }
+
+        function saveToLocalStorage(action) {
+            let history = JSON.parse(localStorage.getItem("combatLog")) || [];
+            history.push(action);
+            localStorage.setItem("combatLog", JSON.stringify(history));
+        }
+
+        function loadHistory() {
+            let history = JSON.parse(localStorage.getItem("combatLog")) || [];
+            let logDiv = document.getElementById("log");
+            history.forEach(action => {
+                let entry = document.createElement("p");
+                entry.textContent = action;
+                logDiv.prepend(entry);
+            });
+        }
+
+        loadHistory();
+    </script>
+</body>
+</html>

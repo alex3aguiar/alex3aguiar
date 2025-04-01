@@ -24,3 +24,14 @@
 <br>
 
 <a href="https://github.com/alex3aguiar">Meu github</a>
+
+
+Here is a simple flow chart:
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```

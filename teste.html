@@ -46,55 +46,12 @@
     const captureBtn = document.getElementById('capture');
     const uploadInput = document.getElementById('upload');
 
-    // Ativa a câmera
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => video.srcObject = stream)
-      .catch(err => console.error('Erro ao acessar a câmera:', err));
-
-    // Função principal de processamento da imagem (OCR + parser)
-    function processImage(imageDataUrl) {
-      photo.src = imageDataUrl;
-      output.innerText = 'Lendo texto da imagem...';
-      produtosJson.innerText = '';
-
-      Tesseract.recognize(
-        imageDataUrl,
-        'por',
-        { logger: m => console.log(m) }
-      ).then(({ data: { text } }) => {
-        output.innerText = text;
-        const produtos = extrairProdutosDoTexto(text);
-        produtosJson.innerText = JSON.stringify(produtos, null, 2);
-      }).catch(err => {
-        output.innerText = 'Erro ao processar imagem: ' + err.message;
-      });
-    }
-
-    // Função para extrair produtos do texto OCR
-    function extrairProdutosDoTexto(textoOCR) {
-      const linhas = textoOCR.split('\n');
-      const produtos = [];
-
-      for (const linha of linhas) {
-        // Regex para encontrar o preço no final da linha
-        const match = linha.match(/(.+?)\s+(\d+,\d{2})\)?$/);
-        if (match) {
-          let nome = match[1];
-          let preco = match[2];
-
-          // Remove códigos no início
-          nome = nome.replace(/^\d+\s+\d+\s+/, '');
-          nome = nome.trim();
-
-          // Converte preço para número
-          const valor = parseFloat(preco.replace(',', '.'));
-
-          produtos.push({ nome, valor });
-        }
-      }
-
-      return produtos;
-    }
+    // Ativa a câmera traseira
+    navigator.mediaDevices.getUserMedia({
+      video: { facingMode: { ideal: "environment" } }
+    })
+    .then(stream => video.srcObject = stream)
+    .catch(err => console.error('Erro ao acessar a câmera:', err));
 
     // Captura da câmera
     captureBtn.addEventListener('click', () => {
@@ -119,6 +76,46 @@
       };
       reader.readAsDataURL(file);
     });
+
+    // Processamento OCR + Parser
+    function processImage(imageDataUrl) {
+      photo.src = imageDataUrl;
+      output.innerText = 'Lendo texto da imagem...';
+      produtosJson.innerText = '';
+
+      Tesseract.recognize(
+        imageDataUrl,
+        'por',
+        { logger: m => console.log(m) }
+      ).then(({ data: { text } }) => {
+        output.innerText = text;
+        const produtos = extrairProdutosDoTexto(text);
+        produtosJson.innerText = JSON.stringify(produtos, null, 2);
+      }).catch(err => {
+        output.innerText = 'Erro ao processar imagem: ' + err.message;
+      });
+    }
+
+    // Extração dos produtos do texto
+    function extrairProdutosDoTexto(textoOCR) {
+      const linhas = textoOCR.split('\n');
+      const produtos = [];
+
+      for (const linha of linhas) {
+        const match = linha.match(/(.+?)\s+(\d+,\d{2})\)?$/);
+        if (match) {
+          let nome = match[1];
+          let preco = match[2];
+
+          nome = nome.replace(/^\d+\s+\d+\s+/, '').trim();
+          const valor = parseFloat(preco.replace(',', '.'));
+
+          produtos.push({ nome, valor });
+        }
+      }
+
+      return produtos;
+    }
   </script>
 </body>
 </html>

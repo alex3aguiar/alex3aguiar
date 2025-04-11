@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Leitor de Nota de Mercado</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin: 20px; }
+    video, canvas, img { max-width: 100%; margin: 10px 0; }
+    button, input[type="file"] { padding: 10px 20px; font-size: 16px; margin: 5px; }
+    #output, #produtos-json {
+      white-space: pre-wrap;
+      text-align: left;
+      margin: 20px auto;
+      max-width: 600px;
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    h2 { margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <h1>Leitor de Nota de Mercado</h1>
+
+  <video id="video" autoplay playsinline width="300"></video><br>
+  <button id="capture">📷 Tirar Foto</button>
+  <input type="file" id="upload" accept="image/*"><br>
+
+  <canvas id="canvas" style="display:none;"></canvas>
+  <img id="photo" alt="Imagem capturada ou enviada"><br>
+
+  <h2>Texto Extraído:</h2>
+  <div id="output">Ainda nada por aqui...</div>
+
+  <h2>Produtos Extraídos:</h2>
+  <div id="produtos-json">...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.3/dist/tesseract.min.js"></script>
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const photo = document.getElementById('photo');
+    const output = document.getElementById('output');
+    const produtosJson = document.getElementById('produtos-json');
+    const captureBtn = document.getElementById('capture');
+    const uploadInput = document.getElementById('upload');
+
+    // Ativa a câmera
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => video.srcObject = stream)
+      .catch(err => console.error('Erro ao acessar a câmera:', err));
+
+    // Função principal de processamento da imagem (OCR + parser)
+    function processImage(imageDataUrl) {
+      photo.src = imageDataUrl;
+      output.innerText = 'Lendo texto da imagem...';
+      produtosJson.innerText = '';
+
+      Tesseract.recognize(
+        imageDataUrl,
+        'por',
+        { logger: m => console.log(m) }
+      ).then(({ data: { text } }) => {
+        output.innerText = text;
+        const produtos = extrairProdutosDoTexto(text);
+        produtosJson.innerText = JSON.stringify(produtos, null, 2);
+      }).catch(err => {
+        output.innerText = 'Erro ao processar imagem: ' + err.message;
+      });
+    }
+
+    // Função para extrair produtos do texto OCR
+    function extrairProdutosDoTexto(textoOCR) {
+      const linhas = textoOCR.split('\n');
+      const produtos = [];
+
+      for (const linha of linhas) {
+        // Regex para encontrar o preço no final da linha
+        const match = linha.match(/(.+?)\s+(\d+,\d{2})\)?$/);
+        if (match) {
+          let nome = match[1];
+          let preco = match[2];
+
+          // Remove códigos no início
+          nome = nome.replace(/^\d+\s+\d+\s+/, '');
+          nome = nome.trim();
+
+          // Converte preço para número
+          const valor = parseFloat(preco.replace(',', '.'));
+
+          produtos.push({ nome, valor });
+        }
+      }
+
+      return produtos;
+    }
+
+    // Captura da câmera
+    captureBtn.addEventListener('click', () => {
+      const context = canvas.getContext('2d');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const imageData = canvas.toDataURL('image/png');
+      processImage(imageData);
+    });
+
+    // Upload de imagem
+    uploadInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        const imageData = reader.result;
+        processImage(imageData);
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+</body>
+</html>

@@ -8,3 +8,9 @@ git merge --no-ff  develop
 git checkout origin/develop -- path/to/file
 
 git commit --amend --no-edit
+
+
+dotnet ef database update                           
+
+
+dotnet ef migrations add  nomeDaMigration

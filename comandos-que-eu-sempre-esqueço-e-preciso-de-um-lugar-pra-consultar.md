@@ -15,5 +15,6 @@ Update-Database
 
 
 dotnet ef migrations add  nomeDaMigration
+
 Add-Migration NomeDaMigration
 

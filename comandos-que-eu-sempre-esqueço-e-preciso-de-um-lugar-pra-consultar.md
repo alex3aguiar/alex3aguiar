@@ -15,6 +15,10 @@ Update-Database
 
 
 dotnet ef migrations add  nomeDaMigration
-
 Add-Migration NomeDaMigration
+
+
+
+git reset --hard origin/main
+
 

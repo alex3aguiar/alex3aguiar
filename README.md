@@ -22,7 +22,7 @@
 <br>
 <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/ideias%20de%20presente.md">ideias de presente</a>
 <br>
-
+editado sem pr
 <a href="https://github.com/alex3aguiar">Meu github</a>
 
 

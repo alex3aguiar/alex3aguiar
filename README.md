@@ -1,5 +1,5 @@
 <h1>Meu nome é Alex Silva</h1>
-<h3>Sou programador fullstack de profissão e um artista por hobby</h3>
+<h3>artista</h3>
 
 
 ## Sou alérgico a camarão
@@ -36,5 +36,6 @@ graph TD;
     B-->D;
     C-->D;
 ```
+
 
 

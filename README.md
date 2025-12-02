@@ -22,7 +22,6 @@
 <br>
 <a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/ideias%20de%20presente.md">ideias de presente</a>
 <br>
-<a href="https://github.com/alex3aguiar/alex3aguiar/blob/main/habitos.md">pra anotar habitos </a>
 <br>
 
 <a href="https://github.com/alex3aguiar">Meu github</a>
@@ -37,4 +36,5 @@ graph TD;
     B-->D;
     C-->D;
 ```
+
 

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wordle da Linha Vermelha</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121213;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .game {
+      background: #1a1a1b;
+      padding: 20px;
+      border-radius: 10px;
+      width: 420px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #538d4e;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .log {
+      margin-top: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .guess {
+      padding: 8px;
+      background: #2a2a2b;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .win {
+      background: #538d4e;
+    }
+
+    .lose {
+      background: #b59f3b;
+    }
+
+    .distance {
+      color: #ddd;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game">
+    <h1>🚇 Wordle da Linha Vermelha</h1>
+
+    <!-- INPUT COM AUTOCOMPLETE -->
+    <input
+      id="guessInput"
+      list="stationsList"
+      placeholder="Digite ou selecione a estação..."
+    />
+
+    <datalist id="stationsList"></datalist>
+
+    <button onclick="guess()">Tentar</button>
+
+    <div class="log" id="log"></div>
+  </div>
+
+  <script>
+    const stations = [
+      "Corinthians-Itaquera",
+      "Artur Alvim",
+      "Patriarca-Vila Ré",
+      "Guilhermina-Esperança",
+      "Vila Matilde",
+      "Penha-Lojas Besni",
+      "Carrão-Assaí Atacadista",
+      "Tatuapé",
+      "Belém",
+      "Bresser-Mooca",
+      "Brás",
+      "Pedro II",
+      "Sé",
+      "Anhangabaú",
+      "República",
+      "Santa Cecília",
+      "Marechal Deodoro",
+      "Palmeiras-Barra Funda"
+    ];
+
+    const normalize = str =>
+      str.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    // Preenche o datalist
+    const datalist = document.getElementById("stationsList");
+    stations.forEach(station => {
+      const option = document.createElement("option");
+      option.value = station;
+      datalist.appendChild(option);
+    });
+
+    // ===== ESTAÇÃO DO DIA =====
+    function getStationOfTheDay() {
+      const startDate = new Date(2024, 0, 1); // 01/01/2024
+      const today = new Date();
+
+      const diffDays = Math.floor(
+        (today - startDate) / (1000 * 60 * 60 * 24)
+      );
+
+      return diffDays % stations.length;
+    }
+
+    const secretIndex = getStationOfTheDay();
+    const secret = stations[secretIndex];
+
+    let attempts = 0;
+    const maxAttempts = 6;
+
+    function guess() {
+      const input = document.getElementById("guessInput");
+      const value = input.value.trim();
+      if (!value) return;
+
+      const log = document.getElementById("log");
+      attempts++;
+
+      const normalizedGuess = normalize(value);
+      const guessIndex = stations.findIndex(
+        s => normalize(s) === normalizedGuess
+      );
+
+      let div = document.createElement("div");
+      div.className = "guess";
+
+      if (guessIndex === -1) {
+        div.innerHTML = `<strong>${value}</strong><br>
+          <span class="distance">Escolha uma estação válida da lista</span>`;
+      } 
+      else if (guessIndex === secretIndex) {
+        div.classList.add("win");
+        div.innerHTML = `🎉 <strong>${stations[guessIndex]}</strong><br>
+          Você acertou a estação do dia!`;
+        input.disabled = true;
+      } 
+      else {
+        const distance = Math.abs(secretIndex - guessIndex);
+        div.classList.add("lose");
+        div.innerHTML = `<strong>${stations[guessIndex]}</strong>
+          <div class="distance">
+            Distância: ${distance} estação(ões)
+          </div>`;
+      }
+
+      log.prepend(div);
+      input.value = "";
+
+      if (attempts >= maxAttempts && guessIndex !== secretIndex) {
+        input.disabled = true;
+        const end = document.createElement("div");
+        end.className = "guess win";
+        end.innerHTML = `❌ Fim de jogo<br>
+          Estação do dia: <strong>${secret}</strong>`;
+        log.prepend(end);
+      }
+    }
+  </script>
+</body>
+</html>

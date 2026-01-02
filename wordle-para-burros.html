@@ -7,10 +7,11 @@
     body {
       font-family: Arial, sans-serif;
 
-      /* BACKGROUND REPETIDO */
       background-image: url("https://raw.githubusercontent.com/alex3aguiar/alex3aguiar/main/1d1f134f-401d-42f8-bcc2-01a1a96498a4.webp");
       background-repeat: repeat;
-      background-size: 200px 200px; /* ajuste se quiser maior/menor */
+      background-size: 200px 200px; 
+
+       animation:spin 4s linear infinite;
 
       color: #fff;
       display: flex;
@@ -19,6 +20,18 @@
       height: 100vh;
       margin: 0;
     }
+    @-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
 
     .game {
       background: rgba(26, 26, 27, 0.95);

@@ -2,20 +2,26 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Wordle de metrô de  uma linha só pra quem tem memória fraca</title>
+  <title>Wordle da Linha Vermelha</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #121213;
+
+      /* BACKGROUND REPETIDO */
+      background-image: url("https://raw.githubusercontent.com/alex3aguiar/alex3aguiar/main/1d1f134f-401d-42f8-bcc2-01a1a96498a4.webp");
+      background-repeat: repeat;
+      background-size: 200px 200px; /* ajuste se quiser maior/menor */
+
       color: #fff;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .game {
-      background: #1a1a1b;
+      background: rgba(26, 26, 27, 0.95);
       padding: 20px;
       border-radius: 10px;
       width: 420px;
@@ -83,7 +89,6 @@
   <div class="game">
     <h1>🚇 Wordle da Linha Vermelha</h1>
 
-    <!-- INPUT COM AUTOCOMPLETE -->
     <input
       id="guessInput"
       list="stationsList"
@@ -132,15 +137,12 @@
       datalist.appendChild(option);
     });
 
-    // ===== ESTAÇÃO DO DIA =====
     function getStationOfTheDay() {
-      const startDate = new Date(2024, 0, 1); // 01/01/2024
+      const startDate = new Date(2024, 0, 1);
       const today = new Date();
-
       const diffDays = Math.floor(
         (today - startDate) / (1000 * 60 * 60 * 24)
       );
-
       return diffDays % stations.length;
     }
 

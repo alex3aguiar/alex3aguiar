@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Treino — Alfabeto Fonético da OTAN</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+            background: #111827;
+            color: white;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .card {
+            width: min(90vw, 450px);
+            height: 280px;
+
+            border-radius: 24px;
+
+            background: #1f2937;
+            border: 1px solid #374151;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+            user-select: none;
+
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+
+            transition:
+                transform 0.15s ease,
+                background 0.2s ease;
+        }
+
+        .card:active {
+            transform: scale(0.97);
+        }
+
+        .card.revealed {
+            background: #2563eb;
+        }
+
+        .letter {
+            font-size: 120px;
+            font-weight: 800;
+        }
+
+        .answer {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .counter {
+            margin-top: 25px;
+            color: #6b7280;
+        }
+
+        .instructions {
+            margin-top: 10px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 25px;
+
+            padding: 12px 20px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #374151;
+            color: white;
+
+            font-size: 15px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4b5563;
+        }
+
+        @media (max-width: 500px) {
+
+            h1 {
+                font-size: 23px;
+            }
+
+            .subtitle {
+                margin-bottom: 25px;
+                padding: 0 20px;
+            }
+
+            .card {
+                width: 90vw;
+                height: 260px;
+            }
+
+            .letter {
+                font-size: 100px;
+            }
+
+            .answer {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Alfabeto Fonético da OTAN</h1>
+
+    <div class="subtitle">
+        Tente lembrar a resposta antes de revelar
+    </div>
+
+    <div id="card" class="card">
+        <div id="content" class="letter"></div>
+    </div>
+
+    <div id="counter" class="counter"></div>
+
+    <div class="instructions">
+        Toque para revelar · Toque novamente para continuar
+    </div>
+
+    <button onclick="restart()">
+        🔀 Reiniciar
+    </button>
+
+
+    <script>
+
+        const alphabet = [
+            ["A", "Alfa"],
+            ["B", "Bravo"],
+            ["C", "Charlie"],
+            ["D", "Delta"],
+            ["E", "Echo"],
+            ["F", "Foxtrot"],
+            ["G", "Golf"],
+            ["H", "Hotel"],
+            ["I", "India"],
+            ["J", "Juliett"],
+            ["K", "Kilo"],
+            ["L", "Lima"],
+            ["M", "Mike"],
+            ["N", "November"],
+            ["O", "Oscar"],
+            ["P", "Papa"],
+            ["Q", "Quebec"],
+            ["R", "Romeo"],
+            ["S", "Sierra"],
+            ["T", "Tango"],
+            ["U", "Uniform"],
+            ["V", "Victor"],
+            ["W", "Whiskey"],
+            ["X", "X-ray"],
+            ["Y", "Yankee"],
+            ["Z", "Zulu"]
+        ];
+
+
+        const card = document.getElementById("card");
+        const content = document.getElementById("content");
+        const counter = document.getElementById("counter");
+
+
+        let remaining = [];
+        let current = null;
+        let revealed = false;
+
+
+        function shuffle(array) {
+
+            const result = [...array];
+
+            for (let i = result.length - 1; i > 0; i--) {
+
+                const j = Math.floor(Math.random() * (i + 1));
+
+                [result[i], result[j]] = [result[j], result[i]];
+            }
+
+            return result;
+        }
+
+
+        function restart() {
+
+            remaining = shuffle(alphabet);
+
+            nextCard();
+        }
+
+
+        function nextCard() {
+
+            // Quando terminar as 26 letras,
+            // começa uma nova rodada embaralhada.
+            if (remaining.length === 0) {
+                remaining = shuffle(alphabet);
+            }
+
+
+            current = remaining.pop();
+
+            revealed = false;
+
+
+            card.classList.remove("revealed");
+
+
+            content.className = "letter";
+            content.textContent = current[0];
+
+
+            const shown = alphabet.length - remaining.length;
+
+            counter.textContent = `${shown} / ${alphabet.length}`;
+        }
+
+
+        function handleClick() {
+
+            // Primeiro toque:
+            // mostra a resposta.
+            if (!revealed) {
+
+                revealed = true;
+
+                content.className = "answer";
+                content.textContent = current[1];
+
+                card.classList.add("revealed");
+
+                return;
+            }
+
+
+            // Segundo toque:
+            // passa para a próxima letra.
+            nextCard();
+        }
+
+
+        card.addEventListener("click", handleClick);
+
+
+        // Inicia o treino.
+        restart();
+
+    </script>
+
+</body>
+
+</html>
